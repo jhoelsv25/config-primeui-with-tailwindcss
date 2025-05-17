@@ -1,2 +1,6 @@
-@use 'tailwindcss';
+@import 'tailwindcss';
+@import 'primeicons/primeicons.css';
+@import '../public/styles/layout.scss';
+
 @plugin "tailwindcss-primeui";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
