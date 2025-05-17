@@ -4,6 +4,20 @@ export interface UserData {
   skip: number;
   limit: number;
 }
+export interface Contributor {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  role: 'admin' | 'contributor';
+  status: 'activo' | 'inactivo' | 'expulsado';
+  joinDate: Date;
+  contributions: number;
+  currentCycle: number;
+  isTurnTaken: boolean;
+  lastPaymentDate: Date;
+  missedPayments: number;
+}
 
 export interface User {
   id: number;

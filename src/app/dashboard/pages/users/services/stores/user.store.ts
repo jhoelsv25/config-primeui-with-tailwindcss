@@ -6,6 +6,7 @@ import { pipe, switchMap } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
 import { PageEvent, Pagination } from '@core/models/interfaces/layout.interface';
 import { User, UserData } from '../../models/user.interface';
+import { userMock } from '../../mocks/user.mock';
 
 interface BookState {
   users: User[];
@@ -17,7 +18,7 @@ interface BookState {
 }
 
 const initialState: BookState = {
-  users: [],
+  users: userMock,
   selectedUser: null,
   selectedUsers: [],
   loading: false,
