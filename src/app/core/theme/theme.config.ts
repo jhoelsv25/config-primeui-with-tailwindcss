@@ -8,7 +8,7 @@ export const PRIMENG_CONFIG: PrimeNGConfigType = {
       darkModeSelector: '.dark',
       cssLayer: {
         name: 'primeng',
-        order: 'tailwind-base, primeng, tailwind-utilities',
+        order: 'theme, base, primeng',
       },
     },
   },

@@ -6,11 +6,17 @@ export default [
     title: 'Dashboard',
     loadComponent: () => import('./layouts/layout/layout.component'),
     children: [
-      /* {
+      {
         path: 'users',
         title: 'Usuarios',
-        loadChildren: () => import('../users/user.routes'),
-      }, */
+        loadChildren: () => import('./pages/users/user.routes'),
+      },
+      {
+        path: '',
+        title: 'Dashboard',
+        redirectTo: 'users',
+        pathMatch: 'full',
+      },
     ],
   },
 ] as Routes;
