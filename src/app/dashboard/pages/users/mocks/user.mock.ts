@@ -1,6 +1,4 @@
-import { User } from '../models/user.interface';
-
-export const userMock: any = [
+export const userMock = [
   {
     id: 1,
     name: 'Leanne Graham',
