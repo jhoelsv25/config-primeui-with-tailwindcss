@@ -5,10 +5,9 @@ import * as XLSX from 'xlsx';
 export class UploadExcelService {
   public data = signal<any[]>([]);
   public columns = signal<any[]>([]);
-  constructor() {}
 
   uploadFile(file: any) {
-    const target: DataTransfer = <DataTransfer>file.target;
+    const target: DataTransfer = file.target as DataTransfer; // Cambiado a 'as DataTransfer'
     if (target.files.length !== 1) throw new Error('No se puede subir más de un archivo a la vez');
 
     const reader: FileReader = new FileReader();
@@ -33,7 +32,6 @@ export class UploadExcelService {
         })
       );
     };
-
     reader.readAsBinaryString(target.files[0]);
   }
 
