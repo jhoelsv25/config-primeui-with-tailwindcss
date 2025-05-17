@@ -1,0 +1,51 @@
+<form class="flex flex-col gap-5" [formGroup]="loginForm" (ngSubmit)="singIn()">
+  <div class="flex flex-col" errorForm>
+    <input
+      type="text"
+      id="email"
+      name="username"
+      class="rounded-lg py-2.5 border-gray-200 dark:border-gray-600"
+      autocomplete="username"
+      placeholder="Email del usuario"
+      formControlName="email"
+      pInputText
+    />
+  </div>
+
+  <div class="flex flex-col">
+    <div class="w-full">
+      <div class="relative">
+        <input
+          [type]="showPassword() ? 'text' : 'password'"
+          id="password"
+          name="password"
+          class="w-full rounded-lg py-2.5 border-gray-200 dark:border-gray-600"
+          requiprimary
+          placeholder="Contraseña"
+          autocomplete="current-password"
+          formControlName="password"
+          pInputText
+        />
+        <button
+          type="button"
+          (click)="togglePassword()"
+          class="absolute bottom-2 right-2.5 text-gray-400"
+        >
+          <i class="pi text-xl" [ngClass]="showPassword() ? 'pi-eye-slash' : 'pi-eye'"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-between gap-3">
+    <div class="relative flex items-end gap-1">
+      <p-checkbox [binary]="true" inputId="remember" />
+      <label for="remember" class="text-sm dark:text-gray-500">Recordar contraseña </label>
+    </div>
+
+    <a routerLink="/auth/forgot-password" class="text-sm font-semibold text-primary"
+      >Olvide mi contraseña</a
+    >
+  </div>
+
+  <button type="submit" class="mt-7" pButton>Iniciar Sesión</button>
+</form>
