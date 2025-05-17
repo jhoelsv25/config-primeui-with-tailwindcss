@@ -5,6 +5,19 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "strict": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@env/*": ["./src/environments/*"],
+      "@core/*": ["app/core/*"],
+      "@shared/*": ["app/shared/*"],
+      "@modules/*": ["app/dashboard/*"],
+      "@services/*": ["app/services/*"],
+      "@auth/*": ["app/auth/*"],
+      "@models/*": ["app/models/*"],
+      "@utils/*": ["app/utils/*"],
+      "@assets/*": ["assets/*"]
+    },
+
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,

@@ -1,0 +1,110 @@
+<div class="">
+  <p-tabs value="0">
+    <p-tablist>
+      <p-tab value="0">Base</p-tab>
+      <p-tab value="1">Colores</p-tab>
+      <p-tab value="2">Personalizar</p-tab>
+    </p-tablist>
+    <p-tabpanels>
+      <p-tabpanel value="0">
+        <h6 class="font-bold">Elija el tema de la aplicación</h6>
+        <p class="m-0">
+          Comience seleccionando un tema de la lista a continuación. Puede cambiar el tema en
+          cualquier momento. Los cambios se aplicarán a todos los usuarios de la aplicación.
+        </p>
+        <div class="grid gap-3 rounded-md border border-gray-300 p-3 dark:border-gray-500">
+          <h6 class="font-bold">Tema base</h6>
+          <p>Seleccione un tema base para la aplicación.</p>
+          <p-selectbutton
+            [options]="presetOptions()"
+            [ngModel]="selectedPreset()"
+            [allowEmpty]="false"
+            (ngModelChange)="updatePresetTheme($event)"
+            optionLabel="name"
+            optionValue="value"
+          />
+        </div>
+
+        <p-divider class="my-3" align="center"> o </p-divider>
+
+        <div class="grid gap-3 rounded-md border border-gray-300 p-3 dark:border-gray-500">
+          <h6 class="font-bold">Restaurar tema</h6>
+          <p>Continue utilizando el tema por defecto que tiene el sistema.</p>
+          <p-button (onClick)="restoreTheme()" label="Restaurar tema" icon="pi pi-sync" />
+        </div>
+      </p-tabpanel>
+      <p-tabpanel value="1">
+        <h6 class="font-bold">Seleccione color</h6>
+        <p>Seleccion un color para la aplicación. Puede cambiar el color en cualquier momento.</p>
+        <div
+          class="relative my-3 flex flex-wrap gap-2 rounded-md border border-gray-300 p-3 dark:border-gray-500"
+        >
+          @for (item of primaryColors(); track item.name) {
+            <button
+              type="button"
+              [title]="item.name"
+              (click)="updateColors($event, 'primary', item)"
+              [ngClass]="{ 'outline-primary': item.name === selectedPrimary() }"
+              class="border-none w-5 h-5 rounded-full p-0 cursor-pointer outline-none outline-offset-1"
+              [style]="{
+                'background-color':
+                  item?.name === 'noir' ? 'var(--text-color)' : item?.palette?.['500'],
+              }"
+            ></button>
+          }
+        </div>
+        <p-divider class="my-3" align="center"> o </p-divider>
+        <h6 class="font-bold">Seleccione color para superficie</h6>
+        <p>Seleccion un color para la superficie de la aplicación.</p>
+        <div
+          class="relative my-3 flex flex-wrap gap-2 rounded-md border border-gray-300 p-3 dark:border-gray-500"
+        >
+          @for (item of colorsSurfaces(); track item.name) {
+            <button
+              type="button"
+              (click)="updateColors($event, 'surface', item)"
+              [title]="item.name"
+              [ngClass]="{
+                'outline-primary': selectedSurface()
+                  ? selectedSurface() === item.name
+                  : isDarkTheme()
+                    ? item.name === 'zinc'
+                    : item.name === 'slate',
+              }"
+              class="border-none w-5 h-5 rounded-full p-0 cursor-pointer outline-none outline-offset-1"
+              [style]="{
+                'background-color':
+                  item.name === 'noir' ? 'var(--text-color)' : item?.palette?.['500'],
+              }"
+            ></button>
+          }
+        </div>
+      </p-tabpanel>
+      <p-tabpanel value="2">
+        <h6 class="*/-bold">Personaliza color</h6>
+        <p>
+          Elija un color para personalizar la aplicación. Puede cambiar el color en cualquier
+          momento. Los cambios se aplicarán a todos los usuarios de la aplicación.
+        </p>
+        <div
+          class="my-3 flex flex-col gap-3 rounded-md border border-gray-300 p-3 dark:border-gray-500"
+        >
+          <div class="flex items-center gap-2">
+            <h6>Primary</h6>
+            <p-colorpicker [ngModel]="selectedColorCustom()" inputId="cp-hex" />
+            <input
+              pInputText
+              type="text"
+              [ngModel]="selectedColorCustom()"
+              class="w-24 font-bold"
+            />
+          </div>
+          <div class="flex items-center">
+            <span class="size-5 border-x border-y border-r border-gray-500"></span>
+            <span class="size-5 border-x border-y border-r border-gray-500"></span>
+          </div>
+        </div>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
+</div>
