@@ -5,18 +5,18 @@ import { RouterOutlet } from '@angular/router';
 import { LayoutService } from '@core/services/layout.service';
 
 @Component({
-  selector: 'app-layout',
-  imports: [SideNavComponent, HeaderComponent, RouterOutlet],
-  templateUrl: './layout.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [``],
+    selector: 'app-layout',
+    imports: [SideNavComponent, HeaderComponent, RouterOutlet],
+    templateUrl: './layout.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    styles: [``],
 })
 export default class LayoutComponent {
-  private _layoutService = inject(LayoutService);
+    private _layoutService = inject(LayoutService);
 
-  public isMenuNav = computed(() => this._layoutService.isMenuNav());
+    public isMenuNav = computed(() => this._layoutService.isMenuNav());
 
-  public toggleMenuNav() {
-    this._layoutService.toggleMenuNav();
-  }
+    public toggleMenuNav() {
+        this._layoutService.toggleMenuNav();
+    }
 }
