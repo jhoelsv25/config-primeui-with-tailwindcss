@@ -1,57 +1,57 @@
 <div class="layout-header">
-  <p-button
-    icon="pi pi-bars"
-    (click)="toggleNav()"
-    [rounded]="true"
-    [text]="true"
-    [severity]="'secondary'"
-  ></p-button>
-  <div class="layout-config-menu">
-    <button type="button" class="layout-header-action" (click)="toggleDarkMode()">
-      <i [ngClass]="{ 'pi ': true, 'pi-moon': darkMode(), 'pi-sun': !darkMode() }"></i>
-    </button>
-
-    <button
-      class="layout-header-action layout-header-action-highlight"
-      leaveActiveClass="animate-fadeout"
-      (click)="visible = !visible"
-    >
-      <i class="pi pi-palette"></i>
-    </button>
-
-    <button class="layout-header-menu-button layout-header-action">
-      <i class="pi pi-ellipsis-v"></i>
-    </button>
-
-    <div class="layout-header-menu hidden lg:block">
-      <div class="layout-header-menu-content">
-        <button type="button" class="layout-header-action">
-          <i class="pi pi-calendar"></i>
-          <span>Calendar</span>
+    <p-button
+        icon="pi pi-bars"
+        (click)="toggleNav()"
+        [rounded]="true"
+        [text]="true"
+        [severity]="'secondary'"
+    ></p-button>
+    <div class="layout-config-menu">
+        <button type="button" class="layout-header-action" (click)="toggleDarkMode()">
+            <i [ngClass]="{ 'pi ': true, 'pi-moon': darkMode(), 'pi-sun': !darkMode() }"></i>
         </button>
-        <button type="button" class="layout-header-action">
-          <i class="pi pi-inbox"></i>
-          <span>Messages</span>
+
+        <button
+            class="layout-header-action layout-header-action-highlight"
+            leaveActiveClass="animate-fadeout"
+            (click)="visible = !visible"
+        >
+            <i class="pi pi-palette"></i>
         </button>
-        <button type="button" class="layout-header-action">
-          <i class="pi pi-user"></i>
-          <span>Profile</span>
+
+        <button class="layout-header-menu-button layout-header-action">
+            <i class="pi pi-ellipsis-v"></i>
         </button>
-      </div>
+
+        <div class="layout-header-menu hidden lg:block">
+            <div class="layout-header-menu-content">
+                <button type="button" class="layout-header-action">
+                    <i class="pi pi-calendar"></i>
+                    <span>Calendar</span>
+                </button>
+                <button type="button" class="layout-header-action">
+                    <i class="pi pi-inbox"></i>
+                    <span>Messages</span>
+                </button>
+                <button type="button" class="layout-header-action">
+                    <i class="pi pi-user"></i>
+                    <span>Profile</span>
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <p-drawer
-  [(visible)]="visible"
-  position="right"
-  [modal]="false"
-  [closable]="true"
-  styleClass="text-sm 2xl:w-1/4 xl:w-1/3 md:w-1/2 sm:w-2/3"
+    [(visible)]="visible"
+    position="right"
+    [modal]="false"
+    [closable]="true"
+    styleClass="text-sm 2xl:w-1/4 xl:w-1/3 md:w-1/2 sm:w-2/3"
 >
-  <ng-template #header>
-    <div class="flex items-center gap-2 w-1/">
-      <span class="font-bold">Configura los colores de su tema</span>
-    </div>
-  </ng-template>
-  <app-theme-setting />
+    <ng-template #header>
+        <div class="flex items-center gap-2 w-1/">
+            <span class="font-bold">Configura los colores de su tema</span>
+        </div>
+    </ng-template>
+    <app-theme-setting />
 </p-drawer>

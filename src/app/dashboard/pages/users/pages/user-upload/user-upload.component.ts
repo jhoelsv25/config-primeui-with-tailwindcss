@@ -6,22 +6,22 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { UploadExcelService } from '@shared/services/upload.service';
 
 @Component({
-  selector: 'app-user-upload',
-  imports: [TableModule, ButtonModule, FileUploadModule, ToolbarModule],
-  templateUrl: './user-upload.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-user-upload',
+    imports: [TableModule, ButtonModule, FileUploadModule, ToolbarModule],
+    templateUrl: './user-upload.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class UserUploadComponent {
-  private uploadExcelService = inject(UploadExcelService);
-  public data = computed(() => this.uploadExcelService.data());
-  public columns = computed(() => this.uploadExcelService.columns());
+    private uploadExcelService = inject(UploadExcelService);
+    public data = computed(() => this.uploadExcelService.data());
+    public columns = computed(() => this.uploadExcelService.columns());
 
-  onBasicUploadAuto(event: any) {
-    console.log(event);
-    this.uploadExcelService.uploadFile(event);
-  }
+    onBasicUploadAuto(event: any) {
+        console.log(event);
+        this.uploadExcelService.uploadFile(event);
+    }
 
-  deleteItem(index: number) {
-    this.uploadExcelService.removeItem(index);
-  }
+    deleteItem(index: number) {
+        this.uploadExcelService.removeItem(index);
+    }
 }

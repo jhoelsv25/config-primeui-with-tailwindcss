@@ -9,93 +9,96 @@ import { User, UserData } from '../../models/user.interface';
 import { userMock } from '../../mocks/user.mock';
 
 interface BookState {
-  users: User[];
-  selectedUser: User | null;
-  selectedUsers: User[];
-  loading: boolean;
-  pagination: Pagination;
-  query: string;
+    users: any[];
+    selectedUser: User | null;
+    selectedUsers: User[];
+    loading: boolean;
+    pagination: Pagination;
+    query: string;
 }
 
 const initialState: BookState = {
-  users: userMock,
-  selectedUser: null,
-  selectedUsers: [],
-  loading: false,
-  pagination: { skip: 1, limit: 10, total: 0 },
-  query: '',
+    users: userMock,
+    selectedUser: null,
+    selectedUsers: [],
+    loading: false,
+    pagination: { skip: 1, limit: 10, total: 0 },
+    query: '',
 };
 
 export const UserStore = signalStore(
-  { providedIn: 'root' },
-  withState(initialState),
-  withMethods((store, userService = inject(UserService)) => ({
-    loadUsers: rxMethod<{
-      query?: string;
-      pagination?: PageEvent;
-    } | void>(
-      pipe(
-        switchMap((params) => {
-          const { query, pagination } = params || {};
-          let request$ = userService.getUsers();
-          if (query) request$ = userService.getByQuery(query);
-          if (pagination)
-            request$ = userService.getUserByPagination(pagination.limit, pagination.skip);
-          return request$.pipe(
-            tapResponse({
-              next: (data: UserData) =>
-                patchState(store, {
-                  users: data.users,
-                  pagination: {
-                    limit: data.limit,
-                    skip: data.skip,
-                    total: data.total,
-                  },
+    { providedIn: 'root' },
+    withState(initialState),
+    withMethods((store, userService = inject(UserService)) => ({
+        loadUsers: rxMethod<{
+            query?: string;
+            pagination?: PageEvent;
+        } | void>(
+            pipe(
+                switchMap(params => {
+                    const { query, pagination } = params || {};
+                    let request$ = userService.getUsers();
+                    if (query) request$ = userService.getByQuery(query);
+                    if (pagination)
+                        request$ = userService.getUserByPagination(
+                            pagination.limit,
+                            pagination.skip,
+                        );
+                    return request$.pipe(
+                        tapResponse({
+                            next: (data: UserData) =>
+                                patchState(store, {
+                                    users: data.users,
+                                    pagination: {
+                                        limit: data.limit,
+                                        skip: data.skip,
+                                        total: data.total,
+                                    },
+                                }),
+                            error: error => console.error(error),
+                        }),
+                    );
                 }),
-              error: (error) => console.error(error),
-            })
-          );
-        })
-      )
-    ),
-    removeUser: rxMethod<string>(
-      pipe(
-        switchMap((id) =>
-          userService.removeUser(String(id)).pipe(
-            tapResponse(
-              (message) => console.log(message),
-              (error) => console.error(error)
-            )
-          )
-        )
-      )
-    ),
-    getUserById: rxMethod<User>(
-      pipe(
-        switchMap((id) =>
-          userService.getUserById(String(id)).pipe(
-            tapResponse(
-              (data) => patchState(store, { selectedUser: data }),
-              (error) => console.error(error)
-            )
-          )
-        )
-      )
-    ),
-    setSelectedUser: (user: User) => {
-      patchState(store, { selectedUser: user });
-    },
-    setSelectedUsers: (users: User[]) => {
-      console.log(users);
-      patchState(store, { selectedUsers: users });
-    },
-    setQuery: (query: string) => {
-      patchState(store, { query });
-    },
-  })),
-  withHooks({
-    onInit({ loadUsers }) {
-      loadUsers();
-    },
-  })
+            ),
+        ),
+        removeUser: rxMethod<string>(
+            pipe(
+                switchMap(id =>
+                    userService.removeUser(String(id)).pipe(
+                        tapResponse(
+                            message => console.log(message),
+                            error => console.error(error),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        getUserById: rxMethod<User>(
+            pipe(
+                switchMap(id =>
+                    userService.getUserById(String(id)).pipe(
+                        tapResponse(
+                            data => patchState(store, { selectedUser: data }),
+                            error => console.error(error),
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        setSelectedUser: (user: User) => {
+            patchState(store, { selectedUser: user });
+        },
+        setSelectedUsers: (users: User[]) => {
+            console.log(users);
+            patchState(store, { selectedUsers: users });
+        },
+        setQuery: (query: string) => {
+            patchState(store, { query });
+        },
+    })),
+    withHooks({
+        onInit({ loadUsers }) {
+            loadUsers();
+        },
+    }),
 );

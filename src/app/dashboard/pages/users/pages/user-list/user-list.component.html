@@ -1,112 +1,118 @@
 <div class="">
-  <p-toolbar styleClass="mb-6">
-    <ng-template #start>
-      <p-button (onClick)="newUser()" label="Agregar" icon="pi pi-plus" class="mr-2" size="small" />
-      <p-button
-        severity="danger"
-        label="Eliminar"
-        [disabled]="selectedUsers().length === 0"
-        icon="pi pi-trash"
-        size="small"
-      />
-    </ng-template>
+    <p-toolbar styleClass="mb-6">
+        <ng-template #start>
+            <p-button
+                (onClick)="newUser()"
+                label="Agregar"
+                icon="pi pi-plus"
+                class="mr-2"
+                size="small"
+            />
+            <p-button
+                severity="danger"
+                label="Eliminar"
+                [disabled]="selectedUsers().length === 0"
+                icon="pi pi-trash"
+                size="small"
+            />
+        </ng-template>
 
-    <ng-template #end>
-      <p-splitButton
-        label="Importar"
-        icon="pi pi-upload"
-        [model]="items()"
-        (onClick)="import()"
-        [style]="{ minWidth: '10rem' }"
-        size="small"
-      ></p-splitButton>
-    </ng-template>
-  </p-toolbar>
+        <ng-template #end>
+            <p-splitButton
+                label="Importar"
+                icon="pi pi-upload"
+                [model]="items()"
+                (onClick)="import()"
+                [style]="{ minWidth: '10rem' }"
+                size="small"
+            ></p-splitButton>
+        </ng-template>
+    </p-toolbar>
 
-  <p-table
-    #dt
-    [value]="users()"
-    [globalFilterFields]="['name', 'email', 'phone', 'status']"
-    [tableStyle]="{ 'min-width': '75rem' }"
-    [rowHover]="true"
-    dataKey="id"
-    [(selection)]="selectedUsers"
-  >
-    <ng-template #caption>
-      <div class="flex items-center justify-between">
-        <p-selectbutton
-          [options]="stateOptions"
-          [(ngModel)]="value"
-          optionLabel="label"
-          optionValue="value"
-        />
+    <p-table
+        #dt
+        [value]="users()"
+        [globalFilterFields]="['name', 'email', 'phone', 'status']"
+        [tableStyle]="{ 'min-width': '75rem' }"
+        [rowHover]="true"
+        dataKey="id"
+        [(selection)]="selectedUsers"
+    >
+        <ng-template #caption>
+            <div class="flex items-center justify-between">
+                <p-selectbutton
+                    [options]="stateOptions"
+                    [(ngModel)]="value"
+                    optionLabel="label"
+                    optionValue="value"
+                />
 
-        <p-iconfield>
-          <p-inputicon styleClass="pi pi-search" />
-          <input
-            pInputText
-            type="text"
-            placeholder="Search..."
-            (keyup.enter)="searchUser($event)"
-          />
-        </p-iconfield>
-      </div>
-    </ng-template>
-    <ng-template #header>
-      <tr>
-        <th style="width: 3rem">
-          <p-tableHeaderCheckbox />
-        </th>
-        <th style="min-width: 8rem">Codigo</th>
-        <th pSortableColumn="name" style="min-width: 16rem">
-          Apellidos y Nombres
-          <p-sortIcon field="name" />
-        </th>
-        <th>Avatar</th>
-        <th pSortableColumn="email" style="min-width: 16rem">
-          Email
-          <p-sortIcon field="email" />
-        </th>
-        <th pSortableColumn="phone" style="min-width: 12rem">
-          Telefono
-          <p-sortIcon field="phone" />
-        </th>
-        <th pSortableColumn="status" style="min-width: 12rem">
-          Estado
-          <p-sortIcon field="status" />
-        </th>
-        <th style="min-width: 2rem"></th>
-      </tr>
-    </ng-template>
-    <ng-template #body let-user>
-      <tr>
-        <td style="width: 3rem">
-          <p-tableCheckbox [value]="user" />
-        </td>
-        <td style="min-width: 12rem">{{ user.code ?? 32557846 }}</td>
-        <td style="min-width: 16rem">{{ user.firstName }} {{ user.lastName }}</td>
-        <td>
-          <img
-            [src]="'https://i.pravatar.cc/150?u=' + user.id"
-            [alt]="user.name"
-            style="width: 60px"
-            class="rounded-full"
-            height="60"
-            width="60"
-          />
-        </td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.phone }}</td>
-        <td>
-          <p-tag [value]="'Activo'" [severity]="'success'" [rounded]="true" />
-        </td>
+                <p-iconfield>
+                    <p-inputicon styleClass="pi pi-search" />
+                    <input
+                        pInputText
+                        type="text"
+                        placeholder="Search..."
+                        (keyup.enter)="searchUser($event)"
+                    />
+                </p-iconfield>
+            </div>
+        </ng-template>
+        <ng-template #header>
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox />
+                </th>
+                <th style="min-width: 8rem">Codigo</th>
+                <th pSortableColumn="name" style="min-width: 16rem">
+                    Apellidos y Nombres
+                    <p-sortIcon field="name" />
+                </th>
+                <th>Avatar</th>
+                <th pSortableColumn="email" style="min-width: 16rem">
+                    Email
+                    <p-sortIcon field="email" />
+                </th>
+                <th pSortableColumn="phone" style="min-width: 12rem">
+                    Telefono
+                    <p-sortIcon field="phone" />
+                </th>
+                <th pSortableColumn="status" style="min-width: 12rem">
+                    Estado
+                    <p-sortIcon field="status" />
+                </th>
+                <th style="min-width: 2rem"></th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-user>
+            <tr>
+                <td style="width: 3rem">
+                    <p-tableCheckbox [value]="user" />
+                </td>
+                <td style="min-width: 12rem">{{ user.code ?? 32557846 }}</td>
+                <td style="min-width: 16rem">{{ user.firstName }} {{ user.lastName }}</td>
+                <td>
+                    <img
+                        [src]="'https://i.pravatar.cc/150?u=' + user.id"
+                        [alt]="user.name"
+                        style="width: 60px"
+                        class="rounded-full"
+                        height="60"
+                        width="60"
+                    />
+                </td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+                <td>
+                    <p-tag [value]="'Activo'" [severity]="'success'" [rounded]="true" />
+                </td>
 
-        <td>
-          <p-button icon="pi pi-ellipsis-v" class="mr-2" [rounded]="true" [text]="true" />
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+                <td>
+                    <p-button icon="pi pi-ellipsis-v" class="mr-2" [rounded]="true" [text]="true" />
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 
-  <!--  <app-pagination [pagination]="pagination()" (changePage)="changePage($event)" /> -->
+    <!--  <app-pagination [pagination]="pagination()" (changePage)="changePage($event)" /> -->
 </div>

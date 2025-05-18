@@ -1,15 +1,15 @@
 <div class="layout-wrapper" [class.sidenav-hidden]="isMenuNav()">
-  <app-side-nav />
-  <div
-    class="layout-overlay md:hidden flex"
-    (click)="toggleMenuNav()"
-    (keydown.enter)="toggleMenuNav()"
-    tabindex="0"
-  ></div>
-  <div class="layout-main-container">
-    <app-header />
-    <main class="layout-main">
-      <router-outlet />
-    </main>
-  </div>
+    <app-side-nav />
+    <div
+        class="layout-overlay md:hidden flex"
+        (click)="toggleMenuNav()"
+        (keydown.enter)="toggleMenuNav()"
+        tabindex="0"
+    ></div>
+    <div class="layout-main-container">
+        <app-header />
+        <main class="layout-main">
+            <router-outlet />
+        </main>
+    </div>
 </div>
